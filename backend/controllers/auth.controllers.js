@@ -13,22 +13,12 @@ exports.register = async (req, res) => {
   if (existingUser)
     return res.status(409).json({ message: "Email already exists" });
 
-  const user = new User();
-  // console.log(user);
-
-  user.name = name;
-  user.email = email;
-  // user.password = password;
-
-  const saltRounds = 10; // Number of salt rounds to use
+  const saltRounds = 9; // Number of salt rounds to use
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  user.password = hashedPassword;
-
   if (role) user.role = role;
-  // console.log(user);
+  const user = new User({ name, email, password: hashedPassword, role });
 
   await user.save();
-  // console.log(user);
 
   const { password: newUserPassword, ...newUser } = user.toJSON();
   res.status(201).json(newUser);
@@ -43,7 +33,7 @@ exports.login = async (req, res) => {
 
   console.log(password);
   console.log(user.password);
-  const isMatched = await user.matchPassword(password);
+  const isMatched = await bcrypt.compare(password, user.password);
   console.log(isMatched);
   if (!isMatched)
     return res.status(404).json({ message: "Invalid Credentials" });
