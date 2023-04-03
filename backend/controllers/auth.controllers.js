@@ -3,10 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res) => {
-  console.log(req.body);
   const { name, email, password, role } = req.body;
-
-  console.log(email);
 
   const existingUser = await User.findOne({ email });
 
@@ -22,7 +19,6 @@ exports.register = async (req, res) => {
 
   const { password: newUserPassword, ...newUser } = user.toJSON();
   res.status(201).json(newUser);
-  // console.log(newUser);
 };
 
 exports.login = async (req, res) => {
@@ -31,10 +27,8 @@ exports.login = async (req, res) => {
 
   if (!user) return res.status(404).json({ message: "Invalid Credentials" });
 
-  console.log(password);
-  console.log(user.password);
   const isMatched = await bcrypt.compare(password, user.password);
-  console.log(isMatched);
+
   if (!isMatched)
     return res.status(404).json({ message: "Invalid Credentials" });
 

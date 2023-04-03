@@ -24,21 +24,4 @@ app.listen(process.env.PORT, async (err) => {
   if (err) console.error(err);
   console.log("Server is running on port ", process.env.PORT);
   await connectDB();
-  //   await User.deleteMany();
-  //   console.log("done");
 });
-
-// app.listen(3000, async () => {
-//   console.log("server listening on port 3000");
-//   await connectDB();
-//   console.log("connected");
-//   const user = new User({
-//     email: "shifaa@hotmail.com",
-//     password: "hey",
-//     name: "Shifaa",
-//     classId: [],
-//   });
-//   await user.save();
-// });
-
-// app.use(express.json());

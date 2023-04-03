@@ -6,7 +6,6 @@ exports.enroll = async (req, res) => {
   const { userId, classId } = req.body;
 
   const enrollment = await Enrollment.create({ userId, classId });
-  console.log(enrollment);
 
   res.json(enrollment);
 };
@@ -46,7 +45,6 @@ exports.drop = async (req, res) => {
   const { userId, classId } = req.params;
 
   const dropRequest = await DropRequest.create({ userId, classId });
-  console.log(dropRequest);
 
   res.json(dropRequest);
 };

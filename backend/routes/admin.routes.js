@@ -11,10 +11,10 @@ const {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // where to store the file
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname); // how to name the file
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 

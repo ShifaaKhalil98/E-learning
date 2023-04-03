@@ -7,7 +7,6 @@ exports.addClass = async (req, res) => {
   const { name, code, instructor } = req.body;
 
   const _class = await Class.create({ name, code, instructor });
-  console.log(_class);
 
   res.json(_class);
 };
@@ -21,7 +20,6 @@ exports.getEnrollments = async (req, res) => {
 
 exports.uploadFile = async (req, res) => {
   const { originalname, path } = req.file;
-  console.log(req.file);
 
   const newFile = new File({
     name: originalname,
