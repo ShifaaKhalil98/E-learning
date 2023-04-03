@@ -6,6 +6,7 @@ const {
   addClass,
   getEnrollments,
   uploadFile,
+  getDropRequests,
 } = require("../controllers/admin.controllers");
 
 const storage = multer.diskStorage({
@@ -22,5 +23,6 @@ const upload = multer({ storage: storage });
 router.post("/addClass", addClass);
 router.get("/getEnrollments", getEnrollments);
 router.post("/uploadFile", upload.single("file"), uploadFile);
+router.get("/getDropRequests", getDropRequests);
 
 module.exports = router;

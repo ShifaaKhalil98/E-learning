@@ -1,6 +1,6 @@
 const File = require("../models/file.model");
 const Enrollment = require("../models/enrollment.model");
-const fs = require("fs");
+const DropRequest = require("../models/droprequest.model");
 
 exports.enroll = async (req, res) => {
   const { userId, classId } = req.body;
@@ -42,22 +42,11 @@ exports.downloadFile = async (req, res) => {
   }
 };
 
-// exports.downloadFile = async (req, res) => {
-//   try {
-//     const { classId, fileId } = req.params;
-//     const file = await File.findById(fileId);
-//     if (!file) {
-//       return res.status(404).send("File not found");
-//     }
-//     if (file.classId != classId) {
-//       return res.status(401).send("Unauthorized access");
-//     }
-//     const path = file.path;
-//     const filename = file.name;
-//     res.set('Content-Disposition', `attachment; filename="${filename}"`);
-//     res.download(path);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("Server error");
-//   }
-// };
+exports.drop = async (req, res) => {
+  const { userId, classId } = req.params;
+
+  const dropRequest = await DropRequest.create({ userId, classId });
+  console.log(dropRequest);
+
+  res.json(dropRequest);
+};
